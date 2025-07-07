@@ -720,14 +720,7 @@ bool DynamixelWorkbench::setOperatingMode(uint8_t id, uint8_t index, const char 
     }
     else if (index == CURRENT_BASED_POSITION_CONTROL_MODE)
     {
-      if (!strncmp(model_name, "MX-64-2", strlen("MX-64-2"))   ||
-          !strncmp(model_name, "MX-106-2", strlen("MX-106-2")) ||
-          !strncmp(model_name, "XM", strlen("XM"))             ||
-          !strncmp(model_name, "XH", strlen("XH"))             ||
-          !strncmp(model_name, "RH", strlen("RH")))
-      {
-        result = writeRegister(id, "Operating_Mode", CURRENT_BASED_POSITION_CONTROL_MODE, log);
-      }
+      result = writeRegister(id, "Operating_Mode", CURRENT_BASED_POSITION_CONTROL_MODE, log);
     }
     else if (index == PWM_CONTROL_MODE)
     {
@@ -911,14 +904,7 @@ bool DynamixelWorkbench::currentBasedPositionMode(uint8_t id, int32_t current, c
   result = setCurrentBasedPositionControlMode(id, log);
   if (result == false) return false;
 
-  if (!strncmp(model_name, "MX-64-2", strlen("MX-64-2"))   ||
-      !strncmp(model_name, "MX-106-2", strlen("MX-106-2")) ||
-      !strncmp(model_name, "XM", strlen("XM"))             ||
-      !strncmp(model_name, "XH", strlen("XH"))             ||
-      !strncmp(model_name, "RH", strlen("RH")))
-  {
-    result = writeRegister(id, "Goal_Current", current, log);
-  }
+  result = writeRegister(id, "Goal_Current", current, log);
 
   if (result == false)
   {
@@ -929,7 +915,7 @@ bool DynamixelWorkbench::currentBasedPositionMode(uint8_t id, int32_t current, c
   result = torqueOn(id, log);
   if (result == false) return false;
 
-  if (log != NULL) *log = "[DynamixelWorkbench] Succeeded to set Current Based Position Wheel Mode!";
+  if (log != NULL) *log = "[DynamixelWorkbench] Succeeded to set Current Based Position Mode!";
   return result;
 }
 
